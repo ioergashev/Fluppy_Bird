@@ -11,7 +11,7 @@ public class Coin : MonoBehaviour
 
 		if (other.GetComponent<Bird>() != null)
 		{ 
-			GameControl.instance.CoinCollected();
+			GameControl.instance.CoinCollectedHandler();
 			gameObject.SetActive(false);
 		}
 	}

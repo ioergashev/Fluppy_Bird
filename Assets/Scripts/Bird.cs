@@ -45,6 +45,6 @@ public class Bird : MonoBehaviour
 		//...tell the Animator about it...
 		anim.SetTrigger ("Die");
 		//...and tell the game control about it.
-		GameControl.instance.BirdDied ();
+		GameControl.instance.BirdDiedHandler ();
 	}
 }
