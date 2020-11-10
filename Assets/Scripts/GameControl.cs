@@ -13,12 +13,6 @@ public class GameControl : MonoBehaviour
 
 	private int LevelCoinsCount;
 
-	private int AllCoinsCount
-	{
-		get => PlayerPrefs.GetInt("coins_count");
-		set => PlayerPrefs.SetInt("coins_count", value);
-	}
-
 	void Awake()
 	{
 		if (instance == null)
@@ -30,20 +24,21 @@ public class GameControl : MonoBehaviour
     private void Start()
     {
 		managerUI.ShowWindow("in_game_menu_window");
+		managerUI.GetWindowComponent<InGameMenuWindow>("in_game_menu_window")?.UpdateView();
 	}
 
 	public void BirdDiedHandler()
 	{
 		gameOver = true;
 		var gameOverMenu = managerUI.ShowWindow("game_over_menu_window").GetComponent<GameOverMenuWindow>();
-		gameOverMenu?.SetAllCoinsCount(AllCoinsCount);
+		gameOverMenu?.UpdateView();
 		gameOverMenu?.SetLevelCoinsCount(LevelCoinsCount);
 	}
 
 	public void CoinCollectedHandler()
 	{
-		LevelCoinsCount++;
-		AllCoinsCount++;
+		GameSettings.CoinsCount+= GameSettings.CoinsFactor;
+		LevelCoinsCount += GameSettings.CoinsFactor;
 
 		managerUI.GetWindowComponent<InGameMenuWindow>("in_game_menu_window")?.SetCoinsCount(LevelCoinsCount);
 	}
@@ -62,6 +57,7 @@ public class GameControl : MonoBehaviour
 
 	public void ExitGameBtnHandler()
 	{
+		Time.timeScale = 1;
 		SceneManager.LoadScene(0);
 	}
 

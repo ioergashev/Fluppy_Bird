@@ -9,6 +9,8 @@ public class GameOverMenuWindow : MonoBehaviour
     private Text LevelCoinsCountText;
     [SerializeField]
     private Text AllCoinsCountText;
+    [SerializeField]
+    private Text CoinsFactorText;
 
     public void SetLevelCoinsCount(int count)
     {
@@ -18,5 +20,16 @@ public class GameOverMenuWindow : MonoBehaviour
     public void SetAllCoinsCount(int count)
     {
         AllCoinsCountText.text = count.ToString();
+    }
+
+    public void SetCoinsFactor(int value)
+    {
+        CoinsFactorText.text = $"x{value}";
+    }
+
+    public void UpdateView()
+    {
+        SetCoinsFactor(GameSettings.CoinsFactor);
+        SetAllCoinsCount(GameSettings.CoinsCount);
     }
 }

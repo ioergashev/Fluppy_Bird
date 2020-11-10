@@ -27,7 +27,7 @@ public class ManagerUI : MonoBehaviour
         return GetWindow(windowId)?.GetComponent<T>();
     }
 
-    private IdComponent GetWindow(string windowId)
+    public IdComponent GetWindow(string windowId)
     {
         return windows.Find(w => w.Id == windowId);
     }
